@@ -51,7 +51,7 @@ export interface Workflow {
   id: string;
   name: string;
   description: string;
-  status: "published" | "draft";
+  status: "published" | "draft" | "active" | "inactive" | string;
   nodes: WorkflowNode[];
   edges: WorkflowEdge[];
   updated_at: string;
