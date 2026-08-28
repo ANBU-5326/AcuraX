@@ -289,7 +289,7 @@ export default function WorkflowsDesigner() {
                     >
                       <div className="flex items-center justify-between">
                         <span className="font-bold truncate">{w.name}</span>
-                        <Badge variant={w.status === "active" ? "default" : "secondary"}>
+                        <Badge variant={w.status === "published" ? "default" : "secondary"}>
                           {w.status}
                         </Badge>
                       </div>

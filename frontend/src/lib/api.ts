@@ -385,11 +385,13 @@ export const client = {
     }
   },
 
-  async createWorkspace(name: string): Promise<Workspace> {
+  async createWorkspace(nameOrObj: string | { name: string; tier?: string }): Promise<Workspace> {
+    const name = typeof nameOrObj === "string" ? nameOrObj : nameOrObj.name;
+    const tier = typeof nameOrObj === "string" ? "Pro" : nameOrObj.tier || "Pro";
     try {
       return await apiFetch<Workspace>("/workspaces", {
         method: "POST",
-        body: JSON.stringify({ name }),
+        body: JSON.stringify({ name, tier }),
       });
     } catch {
       await this.delay(400);
@@ -398,7 +400,7 @@ export const client = {
         id: `ws-${Date.now()}`,
         name,
         role: "Owner",
-        tier: "Pro",
+        tier,
         members: 1,
         created_at: new Date().toISOString().split("T")[0]
       };
