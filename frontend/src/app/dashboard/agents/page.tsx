@@ -55,8 +55,8 @@ export default function AgentsManager() {
 
   useEffect(() => { loadAgents(); }, []);
 
-  const handleToggleStatus = async (id: string, currentStatus: "active" | "inactive") => {
-    const nextStatus = currentStatus === "active" ? "inactive" : "active";
+  const handleToggleStatus = async (id: string, currentStatus: Agent["status"]) => {
+    const nextStatus: Agent["status"] = currentStatus === "active" ? "inactive" : "active";
     try {
       await client.updateAgent(id, { status: nextStatus });
       setAgents((prev) => prev.map((a) => a.id === id ? { ...a, status: nextStatus } : a));
